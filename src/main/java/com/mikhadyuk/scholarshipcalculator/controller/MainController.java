@@ -34,7 +34,6 @@ public class MainController {
 
     private static void showBaseView() {
         try {
-            System.out.println(MainController.class.getPackage());
             mainLayout = FXMLLoader.load(MainController.class.getResource("/view/base/BaseView.fxml"));
         } catch (IOException e) {
             e.printStackTrace();

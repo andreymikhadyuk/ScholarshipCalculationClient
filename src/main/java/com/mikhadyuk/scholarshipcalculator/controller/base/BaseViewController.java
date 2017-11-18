@@ -1,8 +1,8 @@
 package com.mikhadyuk.scholarshipcalculator.controller.base;
 
+import com.mikhadyuk.scholarshipcalculator.connection.ServerConnection;
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.service.UserService;
-import com.mikhadyuk.scholarshipcalculator.service.ConnectionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,12 +14,12 @@ import javafx.stage.Stage;
 import java.util.Optional;
 
 public class BaseViewController {
-    private ConnectionService connectionService;
+    private ServerConnection serverConnection;
     private UserService userService;
 
     @FXML
     private void initialize() {
-        connectionService = ConnectionService.getInstance();
+        serverConnection = ServerConnection.getInstance();
         userService = UserService.getInstance();
     }
 
@@ -33,7 +33,7 @@ public class BaseViewController {
         }
 
         userService.clearCurrentUserDataInLocal();
-        connectionService.closeServerConnection();
+        serverConnection.closeConnection();
     }
 
     @FXML

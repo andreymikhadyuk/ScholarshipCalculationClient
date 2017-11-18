@@ -1,6 +1,6 @@
 package com.mikhadyuk.scholarshipcalculator.service;
 
-import com.mikhadyuk.scholarshipcalculator.dto.UserDto;
+import com.mikhadyuk.scholarshipcalculator.model.User;
 
 import java.io.*;
 
@@ -19,7 +19,7 @@ public class UserService {
         return instance;
     }
 
-    public void saveCurrentUserInLocal(UserDto user) {
+    public void saveCurrentUserInLocal(User user) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(userDataFile);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -29,12 +29,12 @@ public class UserService {
         }
     }
 
-    public UserDto loadCurrentUser() {
-        UserDto user = null;
+    public User loadCurrentUser() {
+        User user = null;
         try {
             FileInputStream fileInputStream = new FileInputStream(userDataFile);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            user = (UserDto) objectInputStream.readObject();
+            user = (User) objectInputStream.readObject();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }

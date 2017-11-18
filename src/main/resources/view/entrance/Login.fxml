@@ -4,13 +4,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.entrance.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.entrance.EntranceController">
    <children>
       <HBox alignment="CENTER" prefHeight="67.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -23,7 +24,7 @@
       </HBox>
       <VBox alignment="CENTER" prefHeight="342.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField prefHeight="25.0" prefWidth="465.0" promptText="Логин">
+            <TextField fx:id="loginTextField" prefHeight="25.0" prefWidth="465.0" promptText="Логин">
                <font>
                   <Font size="15.0" />
                </font>
@@ -34,17 +35,14 @@
                   <Insets left="100.0" right="100.0" />
                </VBox.margin>
             </TextField>
-            <TextField layoutX="120.0" layoutY="129.0" prefHeight="25.0" prefWidth="465.0" promptText="Пароль">
+            <PasswordField fx:id="passwordTextField" prefHeight="25.0" prefWidth="465.0" promptText="Пароль">
                <font>
                   <Font size="15.0" />
                </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
                <VBox.margin>
                   <Insets left="100.0" right="100.0" />
                </VBox.margin>
-            </TextField>
+            </PasswordField>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
                   <JFXButton buttonType="RAISED" defaultButton="true" disable="true" prefWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #d2224e;" text="Войти" textFill="WHITE">
@@ -55,7 +53,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" prefWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #d2224e;" text="Регистрация" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" onAction="#register" prefWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #d2224e;" text="Регистрация" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
