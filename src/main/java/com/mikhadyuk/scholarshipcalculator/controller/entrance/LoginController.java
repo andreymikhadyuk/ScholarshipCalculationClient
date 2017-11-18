@@ -1,5 +1,6 @@
 package com.mikhadyuk.scholarshipcalculator.controller.entrance;
 
+import com.jfoenix.controls.JFXButton;
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.service.EntranceService;
 import com.mikhadyuk.scholarshipcalculator.service.UserService;
@@ -12,7 +13,6 @@ import javafx.scene.control.TextField;
 
 public class LoginController {
     private EntranceService entranceService;
-    private UserService userService;
 
     @FXML
     private TextField usernameTextField;
@@ -20,9 +20,18 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
+    private JFXButton loginButton;
+
+    @FXML
     private void initialize() {
         entranceService = SingletonUtil.getInstance(EntranceService.class);
-        userService = SingletonUtil.getInstance(UserService.class);
+    }
+
+    @FXML
+    private void onLoginButtonClick(ActionEvent event) {
+        // Validation
+        if (entranceService.login(usernameTextField.getText(), passwordField.getText())) {
+        }
     }
 
     @FXML

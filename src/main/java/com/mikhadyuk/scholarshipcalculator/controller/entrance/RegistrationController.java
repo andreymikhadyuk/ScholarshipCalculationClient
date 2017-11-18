@@ -41,8 +41,13 @@ public class RegistrationController {
     @FXML
     private void register(ActionEvent event) {
         // validation
-        entranceService.register(usernameTextField.getText(), passwordField.getText()
-        , accountantRadioButton.isSelected() ? Role.ROLE_ACCOUNTANT : Role.ROLE_SECRETARY
-        , lastNameTextField.getText(), firstNameTextField.getText(), patronymicTextField.getText());
+        if (entranceService.register(usernameTextField.getText()
+                , passwordField.getText()
+                , accountantRadioButton.isSelected() ? Role.ROLE_ACCOUNTANT : Role.ROLE_SECRETARY
+                , lastNameTextField.getText()
+                , firstNameTextField.getText()
+                , patronymicTextField.getText())) {
+
+        }
     }
 }

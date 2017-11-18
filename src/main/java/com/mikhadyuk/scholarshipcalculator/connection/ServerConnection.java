@@ -70,10 +70,14 @@ public class ServerConnection {
         }
     }
 
-    public Object receive() throws IOException, ClassNotFoundException {
+    public Object receive() {
         Object object = null;
         if (inputStream != null) {
-            object = inputStream.readObject();
+            try {
+                object = inputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         return object;
     }
