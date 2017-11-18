@@ -3,6 +3,7 @@ package com.mikhadyuk.scholarshipcalculator.controller.base;
 import com.mikhadyuk.scholarshipcalculator.connection.ServerConnection;
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.service.UserService;
+import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -20,7 +21,7 @@ public class BaseViewController {
     @FXML
     private void initialize() {
         serverConnection = ServerConnection.getInstance();
-        userService = UserService.getInstance();
+        userService = SingletonUtil.getInstance(UserService.class);
     }
 
     @FXML
@@ -39,7 +40,7 @@ public class BaseViewController {
     @FXML
     private void goBack(ActionEvent event) {
         MainController.setVisibleGoBackButton(false);
-        MainController.getMainLayout().setCenter(MainController.getGoBackPane());
+        MainController.setNewPane(MainController.getGoBackPane());
     }
 
     @FXML

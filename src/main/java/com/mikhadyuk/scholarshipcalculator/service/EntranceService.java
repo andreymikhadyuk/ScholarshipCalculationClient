@@ -10,17 +10,8 @@ import java.io.IOException;
 public class EntranceService {
     private ServerConnection serverConnection;
 
-    private static EntranceService instance;
-
-    private EntranceService() {
+    public EntranceService() {
         serverConnection = ServerConnection.getInstance();
-    }
-
-    public static EntranceService getInstance() {
-        if (instance == null) {
-            instance = new EntranceService();
-        }
-        return instance;
     }
 
     public void register(String username, String password, Role role,

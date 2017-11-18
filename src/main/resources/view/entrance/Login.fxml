@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.entrance.EntranceController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.entrance.LoginController">
    <children>
       <HBox alignment="CENTER" prefHeight="67.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -24,7 +24,7 @@
       </HBox>
       <VBox alignment="CENTER" prefHeight="342.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="loginTextField" prefHeight="25.0" prefWidth="465.0" promptText="Логин">
+            <TextField fx:id="usernameTextField" prefHeight="25.0" prefWidth="465.0" promptText="Логин">
                <font>
                   <Font size="15.0" />
                </font>
@@ -35,7 +35,7 @@
                   <Insets left="100.0" right="100.0" />
                </VBox.margin>
             </TextField>
-            <PasswordField fx:id="passwordTextField" prefHeight="25.0" prefWidth="465.0" promptText="Пароль">
+            <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="465.0" promptText="Пароль">
                <font>
                   <Font size="15.0" />
                </font>
@@ -53,7 +53,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" onAction="#register" prefWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #d2224e;" text="Регистрация" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" onAction="#onRegistrationButtonClick" prefWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #d2224e;" text="Регистрация" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>

@@ -62,22 +62,6 @@ public class MainController {
         goBackButton.setVisible(show);
     }
 
-    public static Stage getMainStage() {
-        return mainStage;
-    }
-
-    public static void setMainStage(Stage mainStage) {
-        MainController.mainStage = mainStage;
-    }
-
-    public static BorderPane getMainLayout() {
-        return mainLayout;
-    }
-
-    public static void setMainLayout(BorderPane mainLayout) {
-        MainController.mainLayout = mainLayout;
-    }
-
     public static Pane getGoBackPane() {
         return goBackPane;
     }
@@ -87,5 +71,9 @@ public class MainController {
             MainController.goBackPane = goBackPane;
             setVisibleGoBackButton(true);
         }
+    }
+
+    public static void setNewPane(Pane pane) {
+        mainLayout.setCenter(pane);
     }
 }

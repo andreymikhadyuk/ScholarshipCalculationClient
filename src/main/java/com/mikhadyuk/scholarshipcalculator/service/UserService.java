@@ -7,18 +7,6 @@ import java.io.*;
 public class UserService {
     private final static String userDataFile = "user_data.txt";
 
-    private static UserService instance;
-
-    private UserService() {
-    }
-
-    public static UserService getInstance() {
-        if (instance == null) {
-            instance = new UserService();
-        }
-        return instance;
-    }
-
     public void saveCurrentUserInLocal(User user) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(userDataFile);
