@@ -64,15 +64,21 @@ public class ServerConnection {
         }
     }
 
-    public boolean hasConnection() {
+    public void send(Object object) throws IOException {
+        if (outputStream != null) {
+            outputStream.writeObject(object);
+        }
+    }
+
+    public Object receive() throws IOException, ClassNotFoundException {
+        Object object = null;
+        if (inputStream != null) {
+            object = inputStream.readObject();
+        }
+        return object;
+    }
+
+    public boolean isConnected() {
         return instance != null;
-    }
-
-    public ObjectOutputStream getOutputStream() {
-        return outputStream;
-    }
-
-    public ObjectInputStream getInputStream() {
-        return inputStream;
     }
 }
