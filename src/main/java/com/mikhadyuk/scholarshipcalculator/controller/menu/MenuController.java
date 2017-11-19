@@ -61,6 +61,7 @@ public class MenuController {
 
     // Информация о студентах
     // Информация о стипендиях
+    // Факультеты
     // Работа с пользователями
     private JFXButton createMenuButton(String buttonName, Pane pane) {
         JFXButton button = new JFXButton(buttonName);
