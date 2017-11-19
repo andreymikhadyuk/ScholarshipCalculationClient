@@ -31,7 +31,10 @@ public class LoginController {
     private void onLoginButtonClick(ActionEvent event) {
         // Validation
         if (entranceService.login(usernameTextField.getText(), passwordField.getText())) {
+            // Error message
+            return;
         }
+        MainController.setNewPane(PaneUtil.load("/view/menu/Menu.fxml"));
     }
 
     @FXML

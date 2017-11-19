@@ -53,13 +53,21 @@ public class MainController {
         mainLayout.setCenter(loginPane);
     }
 
-    public static void setVisibleGoBackButton(boolean show) {
+    private static ObservableList<Node> getToolBarObservableList() {
         AnchorPane anchorPane = (AnchorPane) mainLayout.getTop();
         ObservableList<Node> anchorPaneObservableList = anchorPane.getChildren();
         ToolBar toolBar = (ToolBar) anchorPaneObservableList.get(0);
-        ObservableList<Node> toolBarObservableList = toolBar.getItems();
-        Button goBackButton = (Button) toolBarObservableList.get(2);
+        return toolBar.getItems();
+    }
+
+    public static void setVisibleGoBackButton(boolean show) {
+        Button goBackButton = (Button) getToolBarObservableList().get(2);
         goBackButton.setVisible(show);
+    }
+
+    public static void setVisibleLogoutButton(boolean show) {
+        Button logoutButton = (Button) getToolBarObservableList().get(1);
+        logoutButton.setVisible(show);
     }
 
     public static Pane getGoBackPane() {

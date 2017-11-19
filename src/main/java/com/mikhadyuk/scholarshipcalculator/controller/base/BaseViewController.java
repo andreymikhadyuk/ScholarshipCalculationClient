@@ -29,8 +29,9 @@ public class BaseViewController {
         Optional<ButtonType> result = showConfirmationAlert("Подтверждение выхода из аккаунта"
         , "Вы уверены что хотите выйти из аккаунта?", null);
         if (result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-            MainController.showLoginView();
+            MainController.setVisibleLogoutButton(false);
             MainController.setVisibleGoBackButton(false);
+            MainController.showLoginView();
         }
 
         userService.clearCurrentUserDataInLocal();
