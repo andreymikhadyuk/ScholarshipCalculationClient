@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.model.enums.Role;
 import com.mikhadyuk.scholarshipcalculator.service.EntranceService;
-import com.mikhadyuk.scholarshipcalculator.service.UserService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 import javafx.event.ActionEvent;

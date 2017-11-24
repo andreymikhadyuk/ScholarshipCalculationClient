@@ -39,9 +39,9 @@ public class MenuController {
 
     private List<JFXButton> createButtons(Role role) {
         List<JFXButton> buttons = new ArrayList<>();
-        Pane studentInformationPane = null;
-        Pane scholarshipInformationPane = null;
-        Pane usersPane = null;
+        String studentInformationPane = null;
+        String scholarshipInformationPane = "/view/menu/item/scholarship/ScholarshipList.fxml";
+        String usersPane = null;
         switch (role) {
             case ROLE_SECRETARY:
                 buttons.add(createMenuButton("Информация о студентах", studentInformationPane));
@@ -63,20 +63,20 @@ public class MenuController {
     // Информация о стипендиях
     // Факультеты
     // Работа с пользователями
-    private JFXButton createMenuButton(String buttonName, Pane pane) {
+    private JFXButton createMenuButton(String buttonName, String panePath) {
         JFXButton button = new JFXButton(buttonName);
         button.setStyle("-fx-font: 16px System; " +
                 "-fx-background-color: #d2224e; " +
                 "-fx-text-fill: #fff");
         button.setPrefWidth(300.);
         button.setCursor(Cursor.HAND);
-        addListener(button, pane);
+        addListener(button, panePath);
         return button;
     }
 
-    private JFXButton addListener(JFXButton button, Pane pane) {
+    private JFXButton addListener(JFXButton button, String panePath) {
         button.setOnAction(e -> {
-            MainController.setNewPane(pane);
+            MainController.setNewPane(PaneUtil.load(panePath));
         });
         return button;
     }

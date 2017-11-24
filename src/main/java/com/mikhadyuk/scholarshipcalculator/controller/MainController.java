@@ -82,6 +82,19 @@ public class MainController {
     }
 
     public static void setNewPane(Pane pane) {
-        mainLayout.setCenter(pane);
+        AnchorPane anchorPane = new AnchorPane();
+
+        AnchorPane.setTopAnchor(pane, 0.0);
+        AnchorPane.setLeftAnchor(pane, 0.0);
+        AnchorPane.setRightAnchor(pane, 0.0);
+        AnchorPane.setBottomAnchor(pane, 0.0);
+
+        anchorPane.getChildren().add(pane);
+
+        mainLayout.setCenter(anchorPane);
+    }
+
+    public static Stage getMainStage() {
+        return mainStage;
     }
 }

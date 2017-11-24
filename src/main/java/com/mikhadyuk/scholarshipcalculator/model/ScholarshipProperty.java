@@ -5,7 +5,7 @@ import com.mikhadyuk.scholarshipcalculator.model.enums.EducationalScholarshipTyp
 import java.io.Serializable;
 
 public class ScholarshipProperty implements Serializable{
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 5L;
 
     private int id;
 
@@ -19,7 +19,7 @@ public class ScholarshipProperty implements Serializable{
 
     private int minAverageScore;
 
-    private double increaseCoefficient;
+    private double increaseCoefficient = 1.0;
 
     public int getId() {
         return id;
