@@ -6,11 +6,13 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Speciality implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private int id;
 
     private String specialityName;
+
+    private String shortSpecialityName;
 
     private Faculty faculty;
 
@@ -32,6 +34,14 @@ public class Speciality implements Serializable{
 
     public void setSpecialityName(String specialityName) {
         this.specialityName = specialityName;
+    }
+
+    public String getShortSpecialityName() {
+        return shortSpecialityName;
+    }
+
+    public void setShortSpecialityName(String shortSpecialityName) {
+        this.shortSpecialityName = shortSpecialityName;
     }
 
     public Faculty getFaculty() {
