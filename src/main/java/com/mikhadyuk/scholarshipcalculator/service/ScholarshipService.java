@@ -2,6 +2,7 @@ package com.mikhadyuk.scholarshipcalculator.service;
 
 import com.mikhadyuk.scholarshipcalculator.connection.ActionType;
 import com.mikhadyuk.scholarshipcalculator.connection.ServerConnection;
+import com.mikhadyuk.scholarshipcalculator.model.BaseAmount;
 import com.mikhadyuk.scholarshipcalculator.model.Scholarship;
 import com.mikhadyuk.scholarshipcalculator.model.ScholarshipProperty;
 
@@ -30,7 +31,7 @@ public class ScholarshipService {
 
     public Scholarship save(Scholarship scholarship) {
         try {
-            saveScholarshipInScholarshipPropertis(scholarship);
+            setScholarshipInFields(scholarship);
             serverConnection.send(ActionType.SAVE_DATA);
             serverConnection.send(scholarship);
             scholarship = (Scholarship) serverConnection.receive();
@@ -44,7 +45,7 @@ public class ScholarshipService {
 
     public Scholarship update(Scholarship scholarship) {
         try {
-            saveScholarshipInScholarshipPropertis(scholarship);
+            setScholarshipInFields(scholarship);
             serverConnection.send(ActionType.UPDATE_DATA);
             serverConnection.send(scholarship);
             scholarship = (Scholarship) serverConnection.receive();
@@ -67,9 +68,20 @@ public class ScholarshipService {
         }
     }
 
-    private void saveScholarshipInScholarshipPropertis(Scholarship scholarship) {
+    private void setScholarshipInFields(Scholarship scholarshipInFields) {
+        saveScholarshipInScholarshipProperties(scholarshipInFields);
+        saveScholarshipInBaseAmount(scholarshipInFields);
+    }
+
+    private void saveScholarshipInScholarshipProperties(Scholarship scholarship) {
         for (ScholarshipProperty scholarshipProperty : scholarship.getScholarshipProperties()) {
             scholarshipProperty.setScholarship(scholarship);
+        }
+    }
+
+    private void saveScholarshipInBaseAmount(Scholarship scholarship) {
+        for (BaseAmount baseAmount : scholarship.getBaseAmounts()) {
+            baseAmount.setScholarship(scholarship);
         }
     }
 }

@@ -3,14 +3,11 @@ package com.mikhadyuk.scholarshipcalculator.controller.menu.item.scholarship;
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.controller.enums.ControllerAction;
 import com.mikhadyuk.scholarshipcalculator.converter.CellBooleanStringConverter;
-import com.mikhadyuk.scholarshipcalculator.converter.CellIntegerStringConverter;
 import com.mikhadyuk.scholarshipcalculator.keeper.ControllerKeeper;
 import com.mikhadyuk.scholarshipcalculator.model.Scholarship;
 import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.util.ArrayList;
 
@@ -120,7 +116,6 @@ public class ScholarshipListController {
     @FXML
     private void view() {
         showModal("Просмотр информации о стипендии", ControllerAction.VIEW);
-
     }
 
     private Scholarship showModal(String title, ControllerAction controllerAction) {
@@ -133,9 +128,10 @@ public class ScholarshipListController {
             case ADD:
                 controller.setScholarship(null);
                 break;
+            case VIEW:
+                controller.disableElementsForView();
             case UPDATE:
             case DELETE:
-            case VIEW:
                 if (!setScholarshipToController(controller)) {
                     return null;
                 }
