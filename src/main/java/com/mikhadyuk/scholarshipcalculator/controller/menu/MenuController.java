@@ -41,6 +41,7 @@ public class MenuController {
         List<JFXButton> buttons = new ArrayList<>();
         String studentInformationPane = null;
         String scholarshipInformationPane = "/view/menu/item/scholarship/ScholarshipList.fxml";
+        String facultyPane = "/view/menu/item/faculty/FacultyList.fxml";
         String usersPane = null;
         switch (role) {
             case ROLE_SECRETARY:
@@ -53,6 +54,7 @@ public class MenuController {
             case ROLE_ADMIN:
                 buttons.add(createMenuButton("Информация о студентах", studentInformationPane));
                 buttons.add(createMenuButton("Информация о стипендиях", scholarshipInformationPane));
+                buttons.add(createMenuButton("Факультеты", facultyPane));
                 buttons.add(createMenuButton("Работа с пользователями", usersPane));
                 break;
         }
@@ -60,8 +62,8 @@ public class MenuController {
     }
 
     // Информация о студентах
-    // Информация о стипендиях
-    // Факультеты
+    // Информация о стипендиях +
+    // Факультеты +
     // Работа с пользователями
     private JFXButton createMenuButton(String buttonName, String panePath) {
         JFXButton button = new JFXButton(buttonName);
