@@ -12,6 +12,8 @@ public class Speciality implements Serializable{
 
     private String specialityName;
 
+    private String shortSpecialityName;
+
     private Faculty faculty;
 
     private EducationalScholarshipType educationalScholarshipType;
@@ -32,6 +34,14 @@ public class Speciality implements Serializable{
 
     public void setSpecialityName(String specialityName) {
         this.specialityName = specialityName;
+    }
+
+    public String getShortSpecialityName() {
+        return shortSpecialityName;
+    }
+
+    public void setShortSpecialityName(String shortSpecialityName) {
+        this.shortSpecialityName = shortSpecialityName;
     }
 
     public Faculty getFaculty() {
