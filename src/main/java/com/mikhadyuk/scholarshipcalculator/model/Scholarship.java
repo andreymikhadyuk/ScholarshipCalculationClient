@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Scholarship implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private int id;
 
     private String type;
 
+    private boolean educational;
+
     private List<ScholarshipProperty> scholarshipProperties;
+
+    private List<BaseAmount> baseAmounts;
 
     public int getId() {
         return id;
@@ -28,11 +32,27 @@ public class Scholarship implements Serializable{
         this.type = type;
     }
 
+    public boolean isEducational() {
+        return educational;
+    }
+
+    public void setEducational(boolean educational) {
+        this.educational = educational;
+    }
+
     public List<ScholarshipProperty> getScholarshipProperties() {
         return scholarshipProperties;
     }
 
     public void setScholarshipProperties(List<ScholarshipProperty> scholarshipProperties) {
         this.scholarshipProperties = scholarshipProperties;
+    }
+
+    public List<BaseAmount> getBaseAmounts() {
+        return baseAmounts;
+    }
+
+    public void setBaseAmounts(List<BaseAmount> baseAmounts) {
+        this.baseAmounts = baseAmounts;
     }
 }

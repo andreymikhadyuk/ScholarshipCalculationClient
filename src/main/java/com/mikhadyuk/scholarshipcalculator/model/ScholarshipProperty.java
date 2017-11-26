@@ -1,19 +1,25 @@
 package com.mikhadyuk.scholarshipcalculator.model;
 
+import com.mikhadyuk.scholarshipcalculator.model.enums.EducationalScholarshipType;
+
 import java.io.Serializable;
 
 public class ScholarshipProperty implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 5L;
 
     private int id;
 
     private Scholarship scholarship;
 
-    private double maxAverageScore;
+    private double amount;
 
-    private double minAverageScore;
+    private EducationalScholarshipType educationalType;
 
-    private double increaseCoefficient;
+    private int maxAverageScore;
+
+    private int minAverageScore;
+
+    private double increaseCoefficient = 1.0;
 
     public int getId() {
         return id;
@@ -31,19 +37,35 @@ public class ScholarshipProperty implements Serializable{
         this.scholarship = scholarship;
     }
 
-    public double getMaxAverageScore() {
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public EducationalScholarshipType getEducationalType() {
+        return educationalType;
+    }
+
+    public void setEducationalType(EducationalScholarshipType educationalType) {
+        this.educationalType = educationalType;
+    }
+
+    public int getMaxAverageScore() {
         return maxAverageScore;
     }
 
-    public void setMaxAverageScore(double maxAverageScore) {
+    public void setMaxAverageScore(int maxAverageScore) {
         this.maxAverageScore = maxAverageScore;
     }
 
-    public double getMinAverageScore() {
+    public int getMinAverageScore() {
         return minAverageScore;
     }
 
-    public void setMinAverageScore(double minAverageScore) {
+    public void setMinAverageScore(int minAverageScore) {
         this.minAverageScore = minAverageScore;
     }
 

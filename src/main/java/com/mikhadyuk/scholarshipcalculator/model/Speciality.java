@@ -1,5 +1,7 @@
 package com.mikhadyuk.scholarshipcalculator.model;
 
+import com.mikhadyuk.scholarshipcalculator.model.enums.EducationalScholarshipType;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,6 +13,8 @@ public class Speciality implements Serializable{
     private String specialityName;
 
     private Faculty faculty;
+
+    private EducationalScholarshipType educationalScholarshipType;
 
     private List<Student> students;
 
@@ -36,6 +40,14 @@ public class Speciality implements Serializable{
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+    public EducationalScholarshipType getEducationalScholarshipType() {
+        return educationalScholarshipType;
+    }
+
+    public void setEducationalScholarshipType(EducationalScholarshipType educationalScholarshipType) {
+        this.educationalScholarshipType = educationalScholarshipType;
     }
 
     public List<Student> getStudents() {
