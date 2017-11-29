@@ -9,13 +9,11 @@ public class Student extends Person {
 
     private List<Mark> marks;
 
-    private boolean disabilityGroup;
+    private List<Scholarship> scholarships;
 
-    private boolean socialScholarship;
+    private double averageScore;
 
-    private boolean personalScholarship;
-
-    private boolean nominalScholarship; //именная
+    private double scholarshipAmount;
 
     public int getGroupNumber() {
         return groupNumber;
@@ -41,35 +39,27 @@ public class Student extends Person {
         this.marks = marks;
     }
 
-    public boolean isDisabilityGroup() {
-        return disabilityGroup;
+    public List<Scholarship> getScholarships() {
+        return scholarships;
     }
 
-    public void setDisabilityGroup(boolean disabilityGroup) {
-        this.disabilityGroup = disabilityGroup;
+    public void setScholarships(List<Scholarship> scholarships) {
+        this.scholarships = scholarships;
     }
 
-    public boolean isSocialScholarship() {
-        return socialScholarship;
+    public double getAverageScore() {
+        return averageScore;
     }
 
-    public void setSocialScholarship(boolean socialScholarship) {
-        this.socialScholarship = socialScholarship;
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
     }
 
-    public boolean isPersonalScholarship() {
-        return personalScholarship;
+    public double getScholarshipAmount() {
+        return scholarshipAmount;
     }
 
-    public void setPersonalScholarship(boolean personalScholarship) {
-        this.personalScholarship = personalScholarship;
-    }
-
-    public boolean isNominalScholarship() {
-        return nominalScholarship;
-    }
-
-    public void setNominalScholarship(boolean nominalScholarship) {
-        this.nominalScholarship = nominalScholarship;
+    public void setScholarshipAmount(double scholarshipAmount) {
+        this.scholarshipAmount = scholarshipAmount;
     }
 }

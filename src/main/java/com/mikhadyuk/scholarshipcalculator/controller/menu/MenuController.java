@@ -39,7 +39,7 @@ public class MenuController {
 
     private List<JFXButton> createButtons(Role role) {
         List<JFXButton> buttons = new ArrayList<>();
-        String studentInformationPane = null;
+        String studentInformationPane = "/view/menu/item/student/StudentList.fxml";
         String scholarshipInformationPane = "/view/menu/item/scholarship/ScholarshipList.fxml";
         String facultyPane = "/view/menu/item/faculty/FacultyList.fxml";
         String usersPane = null;

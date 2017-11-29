@@ -67,6 +67,8 @@ public class ServerConnection {
     public void send(Object object) throws IOException {
         if (outputStream != null) {
             outputStream.writeObject(object);
+            outputStream.flush();
+            outputStream.reset();
         }
     }
 
