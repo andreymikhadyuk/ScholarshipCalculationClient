@@ -15,7 +15,7 @@ public class FacultyService {
         serverConnection = ServerConnection.getInstance();
     }
 
-    public List<Faculty> getAllScholarships() {
+    public List<Faculty> getAllFaculties() {
         List<Faculty> scholarships = null;
         try {
             serverConnection.send(ActionType.GETTIN_LIST_OF_DATA);
