@@ -16,6 +16,8 @@ public class Scholarship implements Serializable{
 
     private List<BaseAmount> baseAmounts;
 
+    private List<Student> students;
+
     public int getId() {
         return id;
     }
@@ -54,5 +56,13 @@ public class Scholarship implements Serializable{
 
     public void setBaseAmounts(List<BaseAmount> baseAmounts) {
         this.baseAmounts = baseAmounts;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }
