@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.menu.item.scholarship.ScholarshipListController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.menu.item.user.UserListController">
    <children>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
          <children>
-            <Label text="Список стипендий" textFill="#ba3c3c">
+            <Label text="Список пользователей" textFill="#ba3c3c">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -66,8 +66,9 @@
          <children>
             <TableView fx:id="tableView" prefHeight="200.0" prefWidth="560.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn fx:id="scholarshipNameColumn" prefWidth="75.0" text="Название стипендии" />
-                  <TableColumn fx:id="educationalColumn" prefWidth="75.0" text="Учебная" />
+                  <TableColumn fx:id="nameColumn" prefWidth="75.0" text="ФИО" />
+                  <TableColumn fx:id="loginColumn" prefWidth="75.0" text="Логин" />
+                  <TableColumn fx:id="roleColumn" prefWidth="75.0" text="Роль" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

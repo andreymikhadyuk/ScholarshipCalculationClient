@@ -33,7 +33,7 @@ public class FacultyListController {
         MainController.setGoBackPane(PaneUtil.load("/view/menu/Menu.fxml"));
 
         facultyService = SingletonUtil.getInstance(FacultyService.class);
-        facultyObservableList.addAll(facultyService.getAllScholarships());
+        facultyObservableList.addAll(facultyService.getAllFaculties());
 
         setUpShortFacultyNameColumn();
         setUpFacultyNameColumn();

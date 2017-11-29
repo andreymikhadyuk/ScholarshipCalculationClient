@@ -8,6 +8,7 @@ import com.mikhadyuk.scholarshipcalculator.model.Scholarship;
 import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class ScholarshipListController {
     @FXML
     private TableColumn<Scholarship, String> scholarshipNameColumn;
     @FXML
-    private TableColumn<Scholarship, Boolean> educationalColumn;
+    private TableColumn<Scholarship, String> educationalColumn;
 
     @FXML
     private void initialize() {
@@ -47,26 +48,12 @@ public class ScholarshipListController {
 
     private void setUpScholarshipNameColumn() {
         scholarshipNameColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        scholarshipNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        scholarshipNameColumn.setOnEditCommit(event -> {
-            final String value = event.getNewValue() != null ?
-                    event.getNewValue() : event.getOldValue();
-            ((Scholarship) event.getTableView().getItems()
-                    .get(event.getTablePosition().getRow())).setType(value);
-            tableView.refresh();
-        });
     }
 
     private void setUpEducationalColumn() {
-        educationalColumn.setCellValueFactory(new PropertyValueFactory<>("educational"));
-        educationalColumn.setCellFactory(TextFieldTableCell.forTableColumn(new CellBooleanStringConverter()));
-        educationalColumn.setOnEditCommit(event -> {
-            final Boolean value = event.getNewValue() != null ?
-                    event.getNewValue() : event.getOldValue();
-            ((Scholarship) event.getTableView().getItems()
-                    .get(event.getTablePosition().getRow())).setEducational(value);
-            tableView.refresh();
-        });
+        educationalColumn.setCellValueFactory(c -> new SimpleStringProperty(
+                c.getValue().isEducational() ? "Да" : "Нет"
+        ));
     }
 
     @FXML

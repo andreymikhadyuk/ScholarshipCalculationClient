@@ -13,11 +13,11 @@ public class EntranceService {
     private UserService userService;
 
     public EntranceService() {
-        serverConnection = ServerConnection.getInstance();
         userService = SingletonUtil.getInstance(UserService.class);
     }
 
     public boolean login(String username, String password) {
+        serverConnection = ServerConnection.getInstance();
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -33,6 +33,7 @@ public class EntranceService {
 
     public boolean register(String username, String password, Role role,
                          String lastName, String firstName, String patronymic) {
+        serverConnection = ServerConnection.getInstance();
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);

@@ -15,17 +15,17 @@ public class FacultyService {
         serverConnection = ServerConnection.getInstance();
     }
 
-    public List<Faculty> getAllScholarships() {
-        List<Faculty> scholarships = null;
+    public List<Faculty> getAllFaculties() {
+        List<Faculty> faculties = null;
         try {
             serverConnection.send(ActionType.GETTIN_LIST_OF_DATA);
             serverConnection.send(Faculty.class);
-            scholarships = (List<Faculty>) serverConnection.receive();
+            faculties = (List<Faculty>) serverConnection.receive();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
-        return scholarships;
+        return faculties;
     }
 
     public Faculty save(Faculty faculty) {
