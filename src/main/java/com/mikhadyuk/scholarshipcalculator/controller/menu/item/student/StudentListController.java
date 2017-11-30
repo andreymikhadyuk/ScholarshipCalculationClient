@@ -40,9 +40,9 @@ public class StudentListController {
     @FXML
     private TableColumn<Student, Integer> groupNumberColumn;
     @FXML
-    private TableColumn<Student, Double> averageScoreColumn;
+    private TableColumn<Student, String> averageScoreColumn;
     @FXML
-    private TableColumn<Student, Double> scholarshipAmountColumn;
+    private TableColumn<Student, String> scholarshipAmountColumn;
 
     @FXML
     private void initialize() {
@@ -86,11 +86,15 @@ public class StudentListController {
     }
 
     private void setUpAverageScoreColumn() {
-        averageScoreColumn.setCellValueFactory(new PropertyValueFactory<>("averageScore"));
+        averageScoreColumn.setCellValueFactory(c -> new SimpleStringProperty(
+                String.format("%.2f", c.getValue().getAverageScore())
+        ));
     }
 
     private void setUpScholarshipAmountColumn() {
-        scholarshipAmountColumn.setCellValueFactory(new PropertyValueFactory<>("scholarshipAmount"));
+        scholarshipAmountColumn.setCellValueFactory(c -> new SimpleStringProperty(
+                String.format("%.2f", c.getValue().getScholarshipAmount())
+        ));
     }
 
     private void initFilterBox() {

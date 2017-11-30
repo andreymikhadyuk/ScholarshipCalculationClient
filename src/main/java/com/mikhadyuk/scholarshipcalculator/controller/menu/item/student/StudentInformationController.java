@@ -1,5 +1,6 @@
 package com.mikhadyuk.scholarshipcalculator.controller.menu.item.student;
 
+import com.jfoenix.controls.JFXCheckBox;
 import com.mikhadyuk.scholarshipcalculator.converter.CellIntegerStringConverter;
 import com.mikhadyuk.scholarshipcalculator.model.*;
 import com.mikhadyuk.scholarshipcalculator.service.FacultyService;
@@ -56,6 +57,8 @@ public class StudentInformationController {
     private ComboBox facultyComboBox;
     @FXML
     private ComboBox specialityComboBox;
+    @FXML
+    private JFXCheckBox isHandicappedCheckBox;
 
     @FXML
     private HBox markButtons;
@@ -201,6 +204,7 @@ public class StudentInformationController {
         student.setSpeciality((Speciality) specialityComboBox.getSelectionModel().getSelectedItem());
         student.setMarks(new ArrayList<>(markObservableList));
         student.setScholarships(new ArrayList<>(scholarshipObservableList));
+        student.setHandicapped(isHandicappedCheckBox.isSelected());
         okClicked = true;
         cancel(event);
     }
@@ -222,6 +226,7 @@ public class StudentInformationController {
             firstNameTextField.setText(this.student.getFirstName());
             patronymicTextField.setText(this.student.getPatronymic());
             groupNumberTextField.setText(String.valueOf(this.student.getGroupNumber()));
+            isHandicappedCheckBox.setSelected(this.student.isHandicapped());
             initTables();
             initStudentFacultyAndSpeciality();
         }

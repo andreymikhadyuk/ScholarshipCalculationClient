@@ -15,6 +15,8 @@ public class Student extends Person {
 
     private double scholarshipAmount;
 
+    private boolean handicapped;
+
     public int getGroupNumber() {
         return groupNumber;
     }
@@ -61,5 +63,13 @@ public class Student extends Person {
 
     public void setScholarshipAmount(double scholarshipAmount) {
         this.scholarshipAmount = scholarshipAmount;
+    }
+
+    public boolean isHandicapped() {
+        return handicapped;
+    }
+
+    public void setHandicapped(boolean handicapped) {
+        this.handicapped = handicapped;
     }
 }
