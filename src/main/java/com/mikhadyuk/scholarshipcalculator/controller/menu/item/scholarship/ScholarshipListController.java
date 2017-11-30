@@ -5,6 +5,7 @@ import com.mikhadyuk.scholarshipcalculator.controller.enums.ControllerAction;
 import com.mikhadyuk.scholarshipcalculator.converter.CellBooleanStringConverter;
 import com.mikhadyuk.scholarshipcalculator.keeper.ControllerKeeper;
 import com.mikhadyuk.scholarshipcalculator.model.Scholarship;
+import com.mikhadyuk.scholarshipcalculator.service.ReportService;
 import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
@@ -12,17 +13,23 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
 public class ScholarshipListController {
     private ScholarshipService scholarshipService;
+    private ReportService reportService;
 
     private ObservableList<Scholarship> scholarshipObservableList = FXCollections.observableArrayList();
 
@@ -38,6 +45,7 @@ public class ScholarshipListController {
         MainController.setGoBackPane(PaneUtil.load("/view/menu/Menu.fxml"));
 
         scholarshipService = SingletonUtil.getInstance(ScholarshipService.class);
+        reportService = SingletonUtil.getInstance(ReportService.class);
         scholarshipObservableList.addAll(scholarshipService.getAllScholarships());
 
         setUpScholarshipNameColumn();
@@ -146,5 +154,33 @@ public class ScholarshipListController {
         PaneUtil.showConfirmModal("Ошибка при выборе"
                 , "Не выбрана стипендия"
                 , "Пожалуйста, выберите стипендию в таблице.");
+    }
+
+    @FXML
+    private void saveReport() {
+        String report = reportService.createReport();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Сохранение отчета");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File selectedFile = fileChooser.showSaveDialog(MainController.getMainStage());
+        if (selectedFile != null) {
+            try (PrintWriter fw = new PrintWriter(selectedFile)) {
+                fw.print(report);
+                fw.flush();
+                fw.close();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Создание отчета");
+                alert.setHeaderText("Отчет успешно создан");
+                alert.setContentText(null);
+
+                alert.showAndWait();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

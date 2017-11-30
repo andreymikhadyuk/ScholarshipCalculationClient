@@ -55,6 +55,11 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveReport" prefWidth="120.0" ripplerFill="#ae0c0c" style="-fx-background-color: #9575CD;" text="Сохранить отчет">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
                </children>
             </HBox>
          </children>

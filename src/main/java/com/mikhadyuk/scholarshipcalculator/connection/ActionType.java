@@ -8,7 +8,8 @@ public enum ActionType implements Serializable {
     GETTIN_LIST_OF_DATA("Получение списка "),
     SAVE_DATA("Сохранение данных"),
     UPDATE_DATA("Изменение данных"),
-    DELETE_DATA("Удаление данных");
+    DELETE_DATA("Удаление данных"),
+    REPORT_CREATING("Создаение отчета");
 
     private final String actionDescription;
     private ActionType(String actionDescription) {
@@ -19,6 +20,6 @@ public enum ActionType implements Serializable {
         return this.actionDescription;
     }
 
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 7L;
 }
 
