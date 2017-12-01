@@ -47,7 +47,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#delete" prefWidth="80.0" ripplerFill="#ae0c0c" style="-fx-background-color: #F44336;" text="Удалить">
+                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#delete" prefHeight="25.0" prefWidth="70.0" ripplerFill="#ae0c0c" style="-fx-background-color: #F44336;" text="Удалить">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -55,7 +55,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveReport" prefWidth="120.0" ripplerFill="#ae0c0c" style="-fx-background-color: #9575CD;" text="Сохранить отчет">
+                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveReport" prefHeight="25.0" prefWidth="111.0" ripplerFill="#ae0c0c" style="-fx-background-color: #9575CD;" text="Сохранить отчет">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#makeGraphic" prefHeight="25.0" prefWidth="68.0" ripplerFill="#ae0c0c" style="-fx-background-color: #009688;" text="График">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

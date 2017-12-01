@@ -4,7 +4,9 @@ import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.controller.enums.ControllerAction;
 import com.mikhadyuk.scholarshipcalculator.converter.CellBooleanStringConverter;
 import com.mikhadyuk.scholarshipcalculator.keeper.ControllerKeeper;
+import com.mikhadyuk.scholarshipcalculator.model.BaseAmount;
 import com.mikhadyuk.scholarshipcalculator.model.Scholarship;
+import com.mikhadyuk.scholarshipcalculator.service.BaseAmountService;
 import com.mikhadyuk.scholarshipcalculator.service.ReportService;
 import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
@@ -13,23 +15,30 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class ScholarshipListController {
     private ScholarshipService scholarshipService;
     private ReportService reportService;
+    private BaseAmountService baseAmountService;
 
     private ObservableList<Scholarship> scholarshipObservableList = FXCollections.observableArrayList();
 
@@ -46,6 +55,7 @@ public class ScholarshipListController {
 
         scholarshipService = SingletonUtil.getInstance(ScholarshipService.class);
         reportService = SingletonUtil.getInstance(ReportService.class);
+        baseAmountService = SingletonUtil.getInstance(BaseAmountService.class);
         scholarshipObservableList.addAll(scholarshipService.getAllScholarships());
 
         setUpScholarshipNameColumn();
@@ -182,5 +192,62 @@ public class ScholarshipListController {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    private void makeGraphic() {
+        List<PieChart.Data> dataList = new ArrayList<>();
+
+        List<BaseAmount> baseAmounts = baseAmountService.getAllBaseAmounts();
+        for (BaseAmount baseAmount : baseAmounts) {
+            dataList.add(new PieChart.Data(
+                    String.format("%s\r\nспециальность", baseAmount.getEducationalType().getLabel()),
+                    baseAmount.getAmount()));
+        }
+        for (Scholarship scholarship : scholarshipObservableList) {
+            if (!scholarship.isEducational()) {
+                dataList.add(new PieChart.Data(
+                        String.format(scholarship.getType()),
+                                scholarship.getScholarshipProperties().get(0).getAmount()));
+            }
+        }
+
+        //Preparing ObservbleList object
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(dataList);
+
+        //Creating a Pie chart
+        PieChart pieChart = new PieChart(pieChartData) ;
+
+        //Setting the title of the Pie chart
+        pieChart.setTitle("Базовые размеры студенческих стипендий") ;
+
+        //setting the direction to arrange the data
+        pieChart.setClockwise(true) ;
+
+        //Setting the length of the label line
+        pieChart.setLabelLineLength(50) ;
+
+        //Setting the labels of the pie chart visible
+        pieChart.setLabelsVisible(true) ;
+
+        //Setting the start angle of the pie chart
+        pieChart.setStartAngle(180) ;
+
+        //Creating a Group object
+        Group root = new Group(pieChart) ;
+
+        //Creating a scene object
+
+        Stage stage = new Stage();
+        stage.setTitle("График оценок студентов") ;
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(MainController.getMainStage());
+        stage.setResizable(false);
+
+//        Scene scene = new Scene(root, 600, 400) ;
+        Scene scene = new Scene(root) ;
+        stage.setScene(scene);
+
+        stage.showAndWait();
     }
 }
