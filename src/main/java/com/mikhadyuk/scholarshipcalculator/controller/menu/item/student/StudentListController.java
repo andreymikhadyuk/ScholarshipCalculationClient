@@ -4,6 +4,7 @@ import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.controller.enums.ControllerAction;
 import com.mikhadyuk.scholarshipcalculator.keeper.ControllerKeeper;
 import com.mikhadyuk.scholarshipcalculator.model.Student;
+import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.service.StudentService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 public class StudentListController {
     private StudentService studentService;
+    private ScholarshipService scholarshipService;
 
     ObservableList<String> filterItems = FXCollections.observableArrayList();
 
@@ -49,6 +51,7 @@ public class StudentListController {
         MainController.setGoBackPane(PaneUtil.load("/view/menu/Menu.fxml"));
 
         studentService = SingletonUtil.getInstance(StudentService.class);
+        scholarshipService = SingletonUtil.getInstance(ScholarshipService.class);
         studentObservableList.addAll(studentService.getAllStudents());
 
         setUpNameColumn();
@@ -254,5 +257,13 @@ public class StudentListController {
         PaneUtil.showConfirmModal("Ошибка при выборе"
                 , "Не выбран студент"
                 , "Пожалуйста, выберите студента в таблице.");
+    }
+
+    @FXML
+    private void recalculateScholarships() {
+        studentObservableList.clear();
+        studentObservableList.addAll(scholarshipService.recalculateScholarships());
+        filter();
+        tableView.refresh();
     }
 }

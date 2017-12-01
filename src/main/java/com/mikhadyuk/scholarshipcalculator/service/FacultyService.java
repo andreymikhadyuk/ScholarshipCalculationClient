@@ -18,7 +18,7 @@ public class FacultyService {
     public List<Faculty> getAllFaculties() {
         List<Faculty> faculties = null;
         try {
-            serverConnection.send(ActionType.GETTIN_LIST_OF_DATA);
+            serverConnection.send(ActionType.GETTING_LIST_OF_DATA);
             serverConnection.send(Faculty.class);
             faculties = (List<Faculty>) serverConnection.receive();
         } catch (IOException e) {

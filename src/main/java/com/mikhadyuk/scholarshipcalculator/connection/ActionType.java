@@ -5,11 +5,12 @@ import java.io.Serializable;
 public enum ActionType implements Serializable {
     LOGIN("Вход в аккаунт"),
     REGISTRATION("Регистрация"),
-    GETTIN_LIST_OF_DATA("Получение списка "),
+    GETTING_LIST_OF_DATA("Получение списка "),
     SAVE_DATA("Сохранение данных"),
     UPDATE_DATA("Изменение данных"),
     DELETE_DATA("Удаление данных"),
-    REPORT_CREATING("Создаение отчета");
+    REPORT_CREATING("Создаение отчета"),
+    RECALCULATE_SCHOLARSHIPS("Персчет стипендий");
 
     private final String actionDescription;
     private ActionType(String actionDescription) {
@@ -20,6 +21,6 @@ public enum ActionType implements Serializable {
         return this.actionDescription;
     }
 
-    private static final long serialVersionUID = 7L;
+    private static final long serialVersionUID = 8L;
 }
 
