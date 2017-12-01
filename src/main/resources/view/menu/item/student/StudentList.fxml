@@ -28,7 +28,7 @@
          <children>
             <ComboBox fx:id="filterBox" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <TextField fx:id="filterField" layoutX="45.0" layoutY="14.0" promptText="Поиск по ФИО" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <HBox alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0">
+            <HBox alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
                   <JFXButton buttonType="RAISED" layoutX="110.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#view" prefWidth="90.0" style="-fx-background-color: #FFCA28;" text="Посмотреть">
                      <cursor>
@@ -55,6 +55,11 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="300.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#recalculateScholarships" prefHeight="25.0" prefWidth="150.0" ripplerFill="#ae0c0c" style="-fx-background-color: #009688;" text="Пересчитать стипендии">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

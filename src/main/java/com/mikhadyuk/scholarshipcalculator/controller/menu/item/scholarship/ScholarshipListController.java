@@ -200,9 +200,11 @@ public class ScholarshipListController {
 
         List<BaseAmount> baseAmounts = baseAmountService.getAllBaseAmounts();
         for (BaseAmount baseAmount : baseAmounts) {
-            dataList.add(new PieChart.Data(
-                    String.format("%s\r\nспециальность", baseAmount.getEducationalType().getLabel()),
-                    baseAmount.getAmount()));
+            if (baseAmount.getAmount() != 0) {
+                dataList.add(new PieChart.Data(
+                        String.format("%s\r\nспециальность", baseAmount.getEducationalType().getLabel()),
+                        baseAmount.getAmount()));
+            }
         }
         for (Scholarship scholarship : scholarshipObservableList) {
             if (!scholarship.isEducational()) {

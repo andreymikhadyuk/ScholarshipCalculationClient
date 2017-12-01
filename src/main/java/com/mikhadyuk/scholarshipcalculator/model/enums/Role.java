@@ -15,5 +15,10 @@ public enum Role implements Serializable{
         return label;
     }
 
-    private static final long serialVersionUID = 2L;
+    @Override
+    public String toString() {
+        return getLabel();
+    }
+
+    private static final long serialVersionUID = 3L;
 }
