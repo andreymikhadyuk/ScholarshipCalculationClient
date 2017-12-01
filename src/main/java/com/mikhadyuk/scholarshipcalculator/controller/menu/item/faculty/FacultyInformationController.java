@@ -159,7 +159,7 @@ public class FacultyInformationController {
 
     public void disableElementsForView() {
         facultyNameTextField.setEditable(false);
-        shortFacultyNameTextField.setDisable(true);
+        shortFacultyNameTextField.setEditable(false);
 
         specialityButtons.setVisible(false);
         specialityTable.setEditable(false);

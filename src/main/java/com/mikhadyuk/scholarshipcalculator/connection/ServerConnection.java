@@ -21,6 +21,8 @@ public class ServerConnection {
     public static ServerConnection getInstance() {
         if (instance == null) {
             instance = new ServerConnection();
+        }
+        if (!instance.isConnected()) {
             instance.connect();
         }
         return instance;
@@ -40,8 +42,6 @@ public class ServerConnection {
     }
 
     public void closeConnection() {
-        instance = null;
-
         if (socket != null) {
             try {
                 socket.close();
@@ -85,6 +85,6 @@ public class ServerConnection {
     }
 
     public boolean isConnected() {
-        return instance != null;
+        return socket != null && !  socket.isClosed();
     }
 }

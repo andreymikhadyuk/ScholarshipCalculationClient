@@ -3,32 +3,28 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.menu.item.student.StudentListController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.menu.item.user.UserListController">
    <children>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
          <children>
-            <Label fx:id="shoppingCenterNameLabel" text="Список студентов" textFill="#ba3c3c">
+            <Label text="Список пользователей" textFill="#ba3c3c">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <AnchorPane maxHeight="82.0" prefHeight="74.0" prefWidth="600.0">
+      <AnchorPane maxHeight="82.0" prefHeight="50.0" prefWidth="513.0">
          <children>
-            <ComboBox fx:id="filterBox" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <TextField fx:id="filterField" layoutX="45.0" layoutY="14.0" promptText="Поиск по ФИО" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <HBox alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <HBox alignment="CENTER_LEFT" layoutX="165.0" maxHeight="50.0" prefHeight="50.0" prefWidth="415.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
                   <JFXButton buttonType="RAISED" layoutX="110.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#view" prefWidth="90.0" style="-fx-background-color: #FFCA28;" text="Посмотреть">
                      <cursor>
@@ -43,7 +39,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#update" prefWidth="80.0" style="-fx-background-color: #00B0FF;" text="Изменить">
+                  <JFXButton fx:id="update" buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#update" prefWidth="80.0" style="-fx-background-color: #00B0FF;" text="Изменить">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -59,11 +55,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="300.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#recalculateScholarships" prefHeight="25.0" prefWidth="150.0" ripplerFill="#ae0c0c" style="-fx-background-color: #009688;" text="Пересчитать стипендии">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
                </children>
             </HBox>
          </children>
@@ -73,14 +64,11 @@
       </AnchorPane>
       <AnchorPane minWidth="250.0" prefHeight="235.0" prefWidth="560.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="560.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
                   <TableColumn fx:id="nameColumn" prefWidth="75.0" text="ФИО" />
-                  <TableColumn fx:id="facultyColumn" prefWidth="75.0" text="Факультет" />
-                  <TableColumn fx:id="specialityColumn" prefWidth="75.0" text="Специальность" />
-                  <TableColumn fx:id="groupNumberColumn" prefWidth="75.0" text="Группа №" />
-                  <TableColumn fx:id="averageScoreColumn" prefWidth="75.0" text="Ср. балл" />
-                  <TableColumn fx:id="scholarshipAmountColumn" prefWidth="75.0" text="Стипендия(руб.)" />
+                  <TableColumn fx:id="loginColumn" prefWidth="75.0" text="Логин" />
+                  <TableColumn fx:id="roleColumn" prefWidth="75.0" text="Роль" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -88,7 +76,7 @@
             </TableView>
          </children>
          <VBox.margin>
-            <Insets bottom="15.0" left="20.0" right="20.0" />
+            <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </AnchorPane>
    </children>

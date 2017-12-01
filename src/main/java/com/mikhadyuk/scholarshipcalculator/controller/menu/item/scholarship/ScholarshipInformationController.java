@@ -221,6 +221,7 @@ public class ScholarshipInformationController {
             showEducationalElements();
         } else {
             scholarshipProperty = this.scholarship.getScholarshipProperties().get(0);
+            amountTextField.setText(String.valueOf(scholarshipProperty.getAmount()));
         }
         initBaseAmountTable();
     }

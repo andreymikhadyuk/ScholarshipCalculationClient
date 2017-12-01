@@ -5,21 +5,26 @@ import com.mikhadyuk.scholarshipcalculator.connection.ServerConnection;
 import com.mikhadyuk.scholarshipcalculator.model.BaseAmount;
 import com.mikhadyuk.scholarshipcalculator.model.Scholarship;
 import com.mikhadyuk.scholarshipcalculator.model.ScholarshipProperty;
+import com.mikhadyuk.scholarshipcalculator.model.Student;
+import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScholarshipService {
     private ServerConnection serverConnection;
+    private StudentService studentService;
 
     public ScholarshipService() {
         serverConnection = ServerConnection.getInstance();
+        studentService = SingletonUtil.getInstance(StudentService.class);
     }
 
     public List<Scholarship> getAllScholarships() {
         List<Scholarship> scholarships = null;
         try {
-            serverConnection.send(ActionType.GETTIN_LIST_OF_DATA);
+            serverConnection.send(ActionType.GETTING_LIST_OF_DATA);
             serverConnection.send(Scholarship.class);
             scholarships = (List<Scholarship>) serverConnection.receive();
         } catch (IOException e) {
@@ -83,5 +88,19 @@ public class ScholarshipService {
         for (BaseAmount baseAmount : scholarship.getBaseAmounts()) {
             baseAmount.setScholarship(scholarship);
         }
+    }
+
+    public List<Student> recalculateScholarships() {
+        List<Student> students = new ArrayList<>();
+
+        try {
+            serverConnection.send(ActionType.RECALCULATE_SCHOLARSHIPS);
+            students = (List<Student>) serverConnection.receive();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return students;
     }
 }

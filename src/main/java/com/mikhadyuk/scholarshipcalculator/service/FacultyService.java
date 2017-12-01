@@ -16,16 +16,16 @@ public class FacultyService {
     }
 
     public List<Faculty> getAllFaculties() {
-        List<Faculty> scholarships = null;
+        List<Faculty> faculties = null;
         try {
-            serverConnection.send(ActionType.GETTIN_LIST_OF_DATA);
+            serverConnection.send(ActionType.GETTING_LIST_OF_DATA);
             serverConnection.send(Faculty.class);
-            scholarships = (List<Faculty>) serverConnection.receive();
+            faculties = (List<Faculty>) serverConnection.receive();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
-        return scholarships;
+        return faculties;
     }
 
     public Faculty save(Faculty faculty) {
