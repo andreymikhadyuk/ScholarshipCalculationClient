@@ -87,8 +87,8 @@ public class StudentInformationController {
         scholarshipService = SingletonUtil.getInstance(ScholarshipService.class);
         facultyService = SingletonUtil.getInstance(FacultyService.class);
 
-        initSpecialityComboBox();
         initFacultyComboBox();
+        initSpecialityComboBox();
 
         setUpSubjectNameColumn();
         setUpMarkColumn();
@@ -135,7 +135,7 @@ public class StudentInformationController {
                             setGraphic(null);
                         } else {
                             setText(item.getShortFacultyName());
-                            initComboBoxSpecialities(item, 0);
+                            initStudentFacultyAndSpeciality(item);
                         }
                     }
                 };
@@ -150,8 +150,13 @@ public class StudentInformationController {
 
     private void initComboBoxSpecialities(Faculty faculty, int index) {
         comboBoxSpecialities.clear();
+//        comboBoxSpecialities.add(faculty.getSpecialities().get(index));
+//        for (int i = 0; i < faculty.getSpecialities().size(); i++) {
+//            if (i != index) {
+//                comboBoxSpecialities.add(faculty.getSpecialities().get(i));
+//            }
+//        }
         comboBoxSpecialities.addAll(faculty.getSpecialities());
-        specialityComboBox.setItems(comboBoxSpecialities);
         specialityComboBox.getSelectionModel().select(index);
     }
 
@@ -268,7 +273,7 @@ public class StudentInformationController {
             groupNumberTextField.setText(String.valueOf(this.student.getGroupNumber()));
             isHandicappedCheckBox.setSelected(this.student.isHandicapped());
             initTables();
-            initStudentFacultyAndSpeciality();
+            initStudentFacultyAndSpeciality(this.student.getSpeciality().getFaculty());
         }
     }
 
@@ -279,17 +284,27 @@ public class StudentInformationController {
         scholarshipTable.refresh();
     }
 
-    private void initStudentFacultyAndSpeciality() {
-        Faculty faculty = this.student.getSpeciality().getFaculty();
-        Speciality speciality = this.student.getSpeciality();
+    private void initStudentFacultyAndSpeciality(Faculty faculty) {
+        Speciality speciality;
+        if (faculty.getId() == this.student.getSpeciality().getFaculty().getId()) {
+            speciality = this.student.getSpeciality();
+        } else {
+            speciality = new Speciality();
+            speciality.setId(-1);
+        }
         for (int i = 0; i < comboBoxFaculties.size(); i++) {
             if (comboBoxFaculties.get(i).getId() == faculty.getId()) {
-                facultyComboBox.getSelectionModel().select(0);
+                facultyComboBox.getSelectionModel().select(i);
+                boolean found = false;
                 for (int j = 0; j < faculty.getSpecialities().size(); j++) {
                     if (faculty.getSpecialities().get(j).getId() == speciality.getId()) {
                         initComboBoxSpecialities(faculty, j);
+                        found = true;
                         break;
                     }
+                }
+                if (!found) {
+                    initComboBoxSpecialities(faculty, 0);
                 }
                 break;
             }
