@@ -3,6 +3,7 @@ package com.mikhadyuk.scholarshipcalculator.controller.base;
 import com.mikhadyuk.scholarshipcalculator.connection.ServerConnection;
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.service.UserService;
+import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class BaseViewController {
 
     @FXML
     private void logOut(ActionEvent event) {
-        Optional<ButtonType> result = showConfirmationAlert("Подтверждение выхода из аккаунта"
+        Optional<ButtonType> result = PaneUtil.showConfirmationModal("Подтверждение выхода из аккаунта"
         , "Вы уверены что хотите выйти из аккаунта?", null);
         if (result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
             MainController.setVisibleLogoutButton(false);
@@ -46,7 +47,7 @@ public class BaseViewController {
 
     @FXML
     private void fullExit(ActionEvent event) {
-        Optional<ButtonType> result = showConfirmationAlert("Подтверждение выхода"
+        Optional<ButtonType> result = PaneUtil.showConfirmationModal("Подтверждение выхода"
                 , "Вы уверены что хотите выйти?", null);
         if (result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
             Node node = (Node) event.getSource();
@@ -54,19 +55,5 @@ public class BaseViewController {
             stage.hide();
             stage.close();
         }
-    }
-
-    private Optional<ButtonType> showConfirmationAlert(String title, String headerText, String contentText) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-
-        ButtonType buttonTypeYes = new ButtonType("Да", ButtonBar.ButtonData.OK_DONE);
-        ButtonType buttonTypeNo = new ButtonType("Нет", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-
-        return alert.showAndWait();
     }
 }

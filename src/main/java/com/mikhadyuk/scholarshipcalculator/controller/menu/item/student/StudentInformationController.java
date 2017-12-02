@@ -7,9 +7,10 @@ import com.mikhadyuk.scholarshipcalculator.service.FacultyService;
 import com.mikhadyuk.scholarshipcalculator.service.MarkService;
 import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.service.StudentService;
+import com.mikhadyuk.scholarshipcalculator.util.MessageUtil;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
+import com.mikhadyuk.scholarshipcalculator.util.RegularExpUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -78,13 +79,16 @@ public class StudentInformationController {
     private TableColumn<Scholarship, String> scholarshipColumn;
 
     @FXML
+    private Label errorLabel;
+
+    @FXML
     private void initialize() {
         studentService = SingletonUtil.getInstance(StudentService.class);
         scholarshipService = SingletonUtil.getInstance(ScholarshipService.class);
         facultyService = SingletonUtil.getInstance(FacultyService.class);
 
-        initSpecialityComboBox();
         initFacultyComboBox();
+        initSpecialityComboBox();
 
         setUpSubjectNameColumn();
         setUpMarkColumn();
@@ -131,7 +135,7 @@ public class StudentInformationController {
                             setGraphic(null);
                         } else {
                             setText(item.getShortFacultyName());
-                            initComboBoxSpecialities(item, 0);
+                            initStudentFacultyAndSpeciality(item);
                         }
                     }
                 };
@@ -146,8 +150,13 @@ public class StudentInformationController {
 
     private void initComboBoxSpecialities(Faculty faculty, int index) {
         comboBoxSpecialities.clear();
+//        comboBoxSpecialities.add(faculty.getSpecialities().get(index));
+//        for (int i = 0; i < faculty.getSpecialities().size(); i++) {
+//            if (i != index) {
+//                comboBoxSpecialities.add(faculty.getSpecialities().get(i));
+//            }
+//        }
         comboBoxSpecialities.addAll(faculty.getSpecialities());
-        specialityComboBox.setItems(comboBoxSpecialities);
         specialityComboBox.getSelectionModel().select(index);
     }
 
@@ -187,8 +196,23 @@ public class StudentInformationController {
                 new EventHandler<TableColumn.CellEditEvent<Scholarship, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<Scholarship, String> t) {
-                        scholarshipObservableList.set(t.getTablePosition().getRow()
-                                , allScholarships.get(t.getTablePosition().getRow()));
+                        int index = -1;
+                        for (int i = 0; i < scholarshipObservableList.size(); i++) {
+                            if (scholarshipObservableList.get(i).getType().equals(t.getNewValue())) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        if (index == t.getTablePosition().getRow()) {
+                            return;
+                        }
+
+                        if (index != -1) {
+                            scholarshipObservableList.remove(t.getTablePosition().getRow());
+                        } else {
+                            scholarshipObservableList.set(t.getTablePosition().getRow()
+                                    , scholarshipService.getByType(allScholarships, t.getNewValue()));
+                        }
                         scholarshipTable.refresh();
                     }
                 }
@@ -197,6 +221,10 @@ public class StudentInformationController {
 
     @FXML
     private void onOkButtonClick(ActionEvent event) {
+        if (!validInput()) {
+            return;
+        }
+
         student.setLastName(lastNameTextField.getText());
         student.setFirstName(firstNameTextField.getText());
         student.setPatronymic(patronymicTextField.getText());
@@ -207,6 +235,23 @@ public class StudentInformationController {
         student.setHandicapped(isHandicappedCheckBox.isSelected());
         okClicked = true;
         cancel(event);
+    }
+
+    private boolean validInput() {
+        errorLabel.setVisible(false);
+        if (!(RegularExpUtil.isCorrectString(lastNameTextField.getText(), RegularExpUtil.NAME_REG_EXP)) ||
+                !(RegularExpUtil.isCorrectString(firstNameTextField.getText(), RegularExpUtil.NAME_REG_EXP)) ||
+                !(RegularExpUtil.isCorrectString(patronymicTextField.getText(), RegularExpUtil.NAME_REG_EXP))) {
+            errorLabel.setText(MessageUtil.getMessage("registration.error.wrongName"));
+            errorLabel.setVisible(true);
+            return false;
+        }
+        if (!(RegularExpUtil.isCorrectString(groupNumberTextField.getText(), RegularExpUtil.GROUP_NUMBER_REG_EXP))) {
+            errorLabel.setText(MessageUtil.getMessage("student.error.wrongGroupNumber"));
+            errorLabel.setVisible(true);
+            return false;
+        }
+        return true;
     }
 
     public boolean isOkClicked() {
@@ -228,7 +273,7 @@ public class StudentInformationController {
             groupNumberTextField.setText(String.valueOf(this.student.getGroupNumber()));
             isHandicappedCheckBox.setSelected(this.student.isHandicapped());
             initTables();
-            initStudentFacultyAndSpeciality();
+            initStudentFacultyAndSpeciality(this.student.getSpeciality().getFaculty());
         }
     }
 
@@ -239,17 +284,27 @@ public class StudentInformationController {
         scholarshipTable.refresh();
     }
 
-    private void initStudentFacultyAndSpeciality() {
-        Faculty faculty = this.student.getSpeciality().getFaculty();
-        Speciality speciality = this.student.getSpeciality();
+    private void initStudentFacultyAndSpeciality(Faculty faculty) {
+        Speciality speciality;
+        if (faculty.getId() == this.student.getSpeciality().getFaculty().getId()) {
+            speciality = this.student.getSpeciality();
+        } else {
+            speciality = new Speciality();
+            speciality.setId(-1);
+        }
         for (int i = 0; i < comboBoxFaculties.size(); i++) {
             if (comboBoxFaculties.get(i).getId() == faculty.getId()) {
-                facultyComboBox.getSelectionModel().select(0);
+                facultyComboBox.getSelectionModel().select(i);
+                boolean found = false;
                 for (int j = 0; j < faculty.getSpecialities().size(); j++) {
                     if (faculty.getSpecialities().get(j).getId() == speciality.getId()) {
                         initComboBoxSpecialities(faculty, j);
+                        found = true;
                         break;
                     }
+                }
+                if (!found) {
+                    initComboBoxSpecialities(faculty, 0);
                 }
                 break;
             }
@@ -272,6 +327,7 @@ public class StudentInformationController {
     @FXML
     void addScholarship(ActionEvent event) {
         Scholarship scholarship = new Scholarship();
+        scholarship.setType("");
         scholarshipObservableList.add(scholarship);
     }
 
@@ -284,7 +340,7 @@ public class StudentInformationController {
             markObservableList.remove(selectedIndex);
             markTable.refresh();
         } else {
-            PaneUtil.showConfirmModal("Ошибка при выборе"
+            PaneUtil.showInformationModal("Ошибка при выборе"
                     , "Не выбран предмет"
                     , "Пожалуйста, выберите предмет.");
         }
@@ -297,7 +353,7 @@ public class StudentInformationController {
             scholarshipObservableList.remove(selectedIndex);
             scholarshipTable.refresh();
         } else {
-            PaneUtil.showConfirmModal("Ошибка при выборе"
+            PaneUtil.showInformationModal("Ошибка при выборе"
                     , "Не выбрана стипендия"
                     , "Пожалуйста, выберите стипендию.");
         }

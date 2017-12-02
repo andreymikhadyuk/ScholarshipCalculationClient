@@ -11,10 +11,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class UserListController {
     private UserService userService;
@@ -92,6 +96,11 @@ public class UserListController {
 
     @FXML
     private void delete() {
+        Optional<ButtonType> result = PaneUtil.showConfirmationModal("Подтверждение удаления"
+                , "Вы уверены что хотите удалить данный элемент?", null);
+        if (!(result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE)) {
+            return;
+        }
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             User user = (User) tableView.getSelectionModel().getSelectedItem();
@@ -144,7 +153,7 @@ public class UserListController {
     }
 
     private void showSelectErrorModal() {
-        PaneUtil.showConfirmModal("Ошибка при выборе"
+        PaneUtil.showInformationModal("Ошибка при выборе"
                 , "Не выбран пользователь"
                 , "Пожалуйста, выберите пользователя в таблице.");
     }

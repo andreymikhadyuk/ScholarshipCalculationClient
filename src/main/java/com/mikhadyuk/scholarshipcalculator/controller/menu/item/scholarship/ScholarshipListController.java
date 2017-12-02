@@ -2,7 +2,6 @@ package com.mikhadyuk.scholarshipcalculator.controller.menu.item.scholarship;
 
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.controller.enums.ControllerAction;
-import com.mikhadyuk.scholarshipcalculator.converter.CellBooleanStringConverter;
 import com.mikhadyuk.scholarshipcalculator.keeper.ControllerKeeper;
 import com.mikhadyuk.scholarshipcalculator.model.BaseAmount;
 import com.mikhadyuk.scholarshipcalculator.model.Scholarship;
@@ -18,11 +17,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,8 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 public class ScholarshipListController {
@@ -107,6 +103,11 @@ public class ScholarshipListController {
 
     @FXML
     private void delete() {
+        Optional<ButtonType> result = PaneUtil.showConfirmationModal("Подтверждение удаления"
+                , "Вы уверены что хотите удалить данный элемент?", null);
+        if (!(result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE)) {
+            return;
+        }
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             Scholarship scholarship = (Scholarship) tableView.getSelectionModel().getSelectedItem();
@@ -161,7 +162,7 @@ public class ScholarshipListController {
     }
 
     private void showSelectErrorModal() {
-        PaneUtil.showConfirmModal("Ошибка при выборе"
+        PaneUtil.showInformationModal("Ошибка при выборе"
                 , "Не выбрана стипендия"
                 , "Пожалуйста, выберите стипендию в таблице.");
     }

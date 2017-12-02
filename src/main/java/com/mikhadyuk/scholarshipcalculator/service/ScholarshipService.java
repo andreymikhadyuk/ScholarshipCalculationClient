@@ -103,4 +103,13 @@ public class ScholarshipService {
 
         return students;
     }
+
+    public Scholarship getByType(List<Scholarship> scholarships, String type) {
+        for (Scholarship scholarship : scholarships) {
+            if (scholarship.getType() == type) {
+                return scholarship;
+            }
+        }
+        return null;
+    }
 }
