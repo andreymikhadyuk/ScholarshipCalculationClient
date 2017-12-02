@@ -267,7 +267,7 @@ public class ScholarshipInformationController {
             scholarshipProperties.remove(selectedIndex);
             propertyTable.refresh();
         } else {
-            PaneUtil.showConfirmModal("Ошибка при выборе"
+            PaneUtil.showInformationModal("Ошибка при выборе"
                     , "Не выбран тип стипендии"
                     , "Пожалуйста, выберите тип стипендии в таблице.");
         }

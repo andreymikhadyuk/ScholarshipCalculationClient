@@ -143,7 +143,7 @@ public class FacultyInformationController {
             specialities.remove(selectedIndex);
             specialityTable.refresh();
         } else {
-            PaneUtil.showConfirmModal("Ошибка при выборе"
+            PaneUtil.showInformationModal("Ошибка при выборе"
                     , "Не выбрана специальность"
                     , "Пожалуйста, выберите специальность.");
         }

@@ -10,11 +10,16 @@ import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class FacultyListController {
     private FacultyService facultyService;
@@ -98,6 +103,11 @@ public class FacultyListController {
 
     @FXML
     private void delete() {
+        Optional<ButtonType> result = PaneUtil.showConfirmationModal("Подтверждение удаления"
+                , "Вы уверены что хотите удалить данный элемент?", null);
+        if (!(result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE)) {
+            return;
+        }
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             Faculty faculty = (Faculty) tableView.getSelectionModel().getSelectedItem();
@@ -150,7 +160,7 @@ public class FacultyListController {
     }
 
     private void showSelectErrorModal() {
-        PaneUtil.showConfirmModal("Ошибка при выборе"
+        PaneUtil.showInformationModal("Ошибка при выборе"
                 , "Не выбран факультет"
                 , "Пожалуйста, выберите факультет в таблице.");
     }

@@ -9,7 +9,6 @@ import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.service.StudentService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -284,7 +283,7 @@ public class StudentInformationController {
             markObservableList.remove(selectedIndex);
             markTable.refresh();
         } else {
-            PaneUtil.showConfirmModal("Ошибка при выборе"
+            PaneUtil.showInformationModal("Ошибка при выборе"
                     , "Не выбран предмет"
                     , "Пожалуйста, выберите предмет.");
         }
@@ -297,7 +296,7 @@ public class StudentInformationController {
             scholarshipObservableList.remove(selectedIndex);
             scholarshipTable.refresh();
         } else {
-            PaneUtil.showConfirmModal("Ошибка при выборе"
+            PaneUtil.showInformationModal("Ошибка при выборе"
                     , "Не выбрана стипендия"
                     , "Пожалуйста, выберите стипендию.");
         }

@@ -18,6 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.Optional;
+
 public class StudentListController {
     private StudentService studentService;
     private ScholarshipService scholarshipService;
@@ -202,6 +204,11 @@ public class StudentListController {
 
     @FXML
     private void delete() {
+        Optional<ButtonType> result = PaneUtil.showConfirmationModal("Подтверждение удаления"
+                , "Вы уверены что хотите удалить данный элемент?", null);
+        if (!(result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE)) {
+            return;
+        }
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             Student student = (Student) tableView.getSelectionModel().getSelectedItem();
@@ -254,7 +261,7 @@ public class StudentListController {
     }
 
     private void showSelectErrorModal() {
-        PaneUtil.showConfirmModal("Ошибка при выборе"
+        PaneUtil.showInformationModal("Ошибка при выборе"
                 , "Не выбран студент"
                 , "Пожалуйста, выберите студента в таблице.");
     }
