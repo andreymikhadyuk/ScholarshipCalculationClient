@@ -9,6 +9,11 @@ public class MessageUtil {
         properties.put("login.error.wrongLogin", "Неверно введенен логин");
         properties.put("login.error.wrongPassword", "Неверно введенен пароль");
         properties.put("login.error.wrongLoginAndPassword", "Ошибка при входе в аккаунт. Проверьте логин и пароль");
+
+        properties.put("registration.error.wrongName", "ФИО может содержать только буквы и знак \'-\'");
+        properties.put("registration.error.wrongConfirmPassword", "Неверно введенен пароль для подтверждения");
+        properties.put("registration.error.passwordsNotEquals", "Пароли не совпадают");
+        properties.put("registration.error.notUniqueUsername", "Введенный логин уже занят. Введите другой");
     }
 
     public static String getMessage(String key) {
