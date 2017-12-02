@@ -1,0 +1,13 @@
+package com.mikhadyuk.scholarshipcalculator.util;
+
+import java.util.regex.Pattern;
+
+public class RegularExpUtil {
+    public static final String LOGIN_REG_EXP = "^[A-z][A-z0-9_]{4,}$";
+    public static final String PASSWORD_REG_EXP = LOGIN_REG_EXP;
+
+    public static boolean isCorrectString(String string, String regExp) {
+        Pattern pattern = Pattern.compile(PASSWORD_REG_EXP);
+        return pattern.matcher(string).matches();
+    }
+}
