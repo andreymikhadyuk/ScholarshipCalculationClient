@@ -14,6 +14,8 @@ public class MessageUtil {
         properties.put("registration.error.wrongConfirmPassword", "Неверно введенен пароль для подтверждения");
         properties.put("registration.error.passwordsNotEquals", "Пароли не совпадают");
         properties.put("registration.error.notUniqueUsername", "Введенный логин уже занят. Введите другой");
+
+        properties.put("student.error.wrongGroupNumber", "Введен неверный номер группы");
     }
 
     public static String getMessage(String key) {

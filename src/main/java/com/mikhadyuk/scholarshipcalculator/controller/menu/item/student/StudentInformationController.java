@@ -7,7 +7,9 @@ import com.mikhadyuk.scholarshipcalculator.service.FacultyService;
 import com.mikhadyuk.scholarshipcalculator.service.MarkService;
 import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.service.StudentService;
+import com.mikhadyuk.scholarshipcalculator.util.MessageUtil;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
+import com.mikhadyuk.scholarshipcalculator.util.RegularExpUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,6 +77,9 @@ public class StudentInformationController {
     private TableView scholarshipTable;
     @FXML
     private TableColumn<Scholarship, String> scholarshipColumn;
+
+    @FXML
+    private Label errorLabel;
 
     @FXML
     private void initialize() {
@@ -196,6 +201,10 @@ public class StudentInformationController {
 
     @FXML
     private void onOkButtonClick(ActionEvent event) {
+        if (!validInput()) {
+            return;
+        }
+
         student.setLastName(lastNameTextField.getText());
         student.setFirstName(firstNameTextField.getText());
         student.setPatronymic(patronymicTextField.getText());
@@ -206,6 +215,23 @@ public class StudentInformationController {
         student.setHandicapped(isHandicappedCheckBox.isSelected());
         okClicked = true;
         cancel(event);
+    }
+
+    private boolean validInput()  {
+        errorLabel.setVisible(false);
+        if (!(RegularExpUtil.isCorrectString(lastNameTextField.getText(), RegularExpUtil.NAME_REG_EXP)) ||
+                !(RegularExpUtil.isCorrectString(firstNameTextField.getText(), RegularExpUtil.NAME_REG_EXP)) ||
+                !(RegularExpUtil.isCorrectString(patronymicTextField.getText(), RegularExpUtil.NAME_REG_EXP))) {
+            errorLabel.setText(MessageUtil.getMessage("registration.error.wrongName"));
+            errorLabel.setVisible(true);
+            return false;
+        }
+        if (!(RegularExpUtil.isCorrectString(groupNumberTextField.getText(), RegularExpUtil.GROUP_NUMBER_REG_EXP))) {
+            errorLabel.setText(MessageUtil.getMessage("student.error.wrongGroupNumber"));
+            errorLabel.setVisible(true);
+            return false;
+        }
+        return true;
     }
 
     public boolean isOkClicked() {

@@ -63,13 +63,13 @@
          </font>
       </Label>
       <Separator layoutX="15.0" layoutY="262.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <AnchorPane layoutY="279.0" prefHeight="286.0" prefWidth="570.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="279.0">
+      <AnchorPane layoutY="279.0" prefHeight="277.0" prefWidth="570.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="279.0">
          <children>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
                 <Tab text="Оценки">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="231.0" prefWidth="570.0">
                            <children>
                               <HBox fx:id="markButtons" alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="25.0" prefWidth="415.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
                                  <children>
@@ -88,7 +88,7 @@
                                     </JFXButton>
                                  </children>
                               </HBox>
-                              <TableView fx:id="markTable" editable="true" prefHeight="121.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                              <TableView fx:id="markTable" editable="true" prefHeight="194.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                                  <columns>
                                     <TableColumn fx:id="subjectNameColumn" prefWidth="91.0" text="Название предмета" />
                                     <TableColumn fx:id="markColumn" prefWidth="75.0" text="Оценка" />
@@ -138,6 +138,15 @@
             </TabPane>
          </children>
       </AnchorPane>
+      <HBox alignment="BOTTOM_CENTER" layoutX="15.0" layoutY="562.0" prefHeight="25.0" prefWidth="570.0" spacing="15.0">
+         <children>
+            <Label fx:id="errorLabel" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
       <HBox prefHeight="31.0" prefWidth="200.0" spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0">
          <children>
             <JFXButton buttonType="RAISED" defaultButton="true" onAction="#onOkButtonClick" prefWidth="100.0" style="-fx-background-color: #00B0FF;" text="ОК" textFill="WHITE">
