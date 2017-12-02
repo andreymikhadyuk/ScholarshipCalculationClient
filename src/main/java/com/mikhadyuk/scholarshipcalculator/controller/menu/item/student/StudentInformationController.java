@@ -191,8 +191,23 @@ public class StudentInformationController {
                 new EventHandler<TableColumn.CellEditEvent<Scholarship, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<Scholarship, String> t) {
-                        scholarshipObservableList.set(t.getTablePosition().getRow()
-                                , allScholarships.get(t.getTablePosition().getRow()));
+                        int index = -1;
+                        for (int i = 0; i < scholarshipObservableList.size(); i++) {
+                            if (scholarshipObservableList.get(i).getType().equals(t.getNewValue())) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        if (index == t.getTablePosition().getRow()) {
+                            return;
+                        }
+
+                        if (index != -1) {
+                            scholarshipObservableList.remove(t.getTablePosition().getRow());
+                        } else {
+                            scholarshipObservableList.set(t.getTablePosition().getRow()
+                                    , scholarshipService.getByType(allScholarships, t.getNewValue()));
+                        }
                         scholarshipTable.refresh();
                     }
                 }
@@ -217,7 +232,7 @@ public class StudentInformationController {
         cancel(event);
     }
 
-    private boolean validInput()  {
+    private boolean validInput() {
         errorLabel.setVisible(false);
         if (!(RegularExpUtil.isCorrectString(lastNameTextField.getText(), RegularExpUtil.NAME_REG_EXP)) ||
                 !(RegularExpUtil.isCorrectString(firstNameTextField.getText(), RegularExpUtil.NAME_REG_EXP)) ||
@@ -297,6 +312,7 @@ public class StudentInformationController {
     @FXML
     void addScholarship(ActionEvent event) {
         Scholarship scholarship = new Scholarship();
+        scholarship.setType("");
         scholarshipObservableList.add(scholarship);
     }
 
