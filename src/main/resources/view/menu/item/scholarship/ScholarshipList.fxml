@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.menu.item.scholarship.ScholarshipListController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mikhadyuk.scholarshipcalculator.controller.menu.item.scholarship.ScholarshipListController">
    <children>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
          <children>
@@ -61,6 +61,11 @@
                      </cursor>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#makeGraphic" prefHeight="25.0" prefWidth="68.0" ripplerFill="#ae0c0c" style="-fx-background-color: #009688;" text="График">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#recalculateScholarships" prefHeight="25.0" prefWidth="150.0" ripplerFill="#ae0c0c" style="-fx-background-color: #BDBDBD;" text="Пересчитать стипендии">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

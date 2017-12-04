@@ -253,4 +253,9 @@ public class ScholarshipListController {
 
         stage.showAndWait();
     }
+
+    @FXML
+    private void recalculateScholarships() {
+        scholarshipService.recalculateScholarships();
+    }
 }

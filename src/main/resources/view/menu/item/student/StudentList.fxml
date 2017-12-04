@@ -59,11 +59,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="300.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#recalculateScholarships" prefHeight="25.0" prefWidth="150.0" ripplerFill="#ae0c0c" style="-fx-background-color: #009688;" text="Пересчитать стипендии">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
                </children>
             </HBox>
          </children>

@@ -265,12 +265,4 @@ public class StudentListController {
                 , "Не выбран студент"
                 , "Пожалуйста, выберите студента в таблице.");
     }
-
-    @FXML
-    private void recalculateScholarships() {
-        studentObservableList.clear();
-        studentObservableList.addAll(scholarshipService.recalculateScholarships());
-        filter();
-        tableView.refresh();
-    }
 }
