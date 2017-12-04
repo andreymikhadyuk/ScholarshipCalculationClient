@@ -13,12 +13,15 @@ import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -232,13 +235,27 @@ public class ScholarshipListController {
 
         //Setting the labels of the pie chart visible
         pieChart.setLabelsVisible(true) ;
-
         //Setting the start angle of the pie chart
         pieChart.setStartAngle(180) ;
 
+        final Label caption = new Label("");
+        caption.setTextFill(Color.DARKORANGE);
+        caption.setStyle("-fx-font: 24 arial;");
+
+        for (final PieChart.Data data : pieChart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED,
+                    new EventHandler<MouseEvent>() {
+                        @Override public void handle(MouseEvent e) {
+                            caption.setTranslateX(e.getSceneX());
+                            caption.setTranslateY(e.getSceneY());
+                            caption.setText(String.valueOf(data.getPieValue()));
+                        }
+                    });
+        }
+
         //Creating a Group object
         Group root = new Group(pieChart) ;
-
+        root.getChildren().add(caption);
         //Creating a scene object
 
         Stage stage = new Stage();
@@ -248,7 +265,7 @@ public class ScholarshipListController {
         stage.setResizable(false);
 
 //        Scene scene = new Scene(root, 600, 400) ;
-        Scene scene = new Scene(root) ;
+        Scene scene = new Scene(root);
         stage.setScene(scene);
 
         stage.showAndWait();
