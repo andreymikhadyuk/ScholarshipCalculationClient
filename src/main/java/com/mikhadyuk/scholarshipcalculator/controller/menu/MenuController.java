@@ -50,6 +50,7 @@ public class MenuController {
                 break;
             case ROLE_ACCOUNTANT:
                 buttons.add(createMenuButton("Информация о стипендиях", scholarshipInformationPane));
+                buttons.add(createMenuButton("Информация о студентах", studentInformationPane));
                 break;
             case ROLE_ADMIN:
                 buttons.add(createMenuButton("Информация о студентах", studentInformationPane));

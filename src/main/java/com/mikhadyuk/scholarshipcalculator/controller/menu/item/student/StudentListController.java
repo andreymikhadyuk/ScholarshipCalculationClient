@@ -1,11 +1,15 @@
 package com.mikhadyuk.scholarshipcalculator.controller.menu.item.student;
 
+import com.jfoenix.controls.JFXButton;
 import com.mikhadyuk.scholarshipcalculator.controller.MainController;
 import com.mikhadyuk.scholarshipcalculator.controller.enums.ControllerAction;
 import com.mikhadyuk.scholarshipcalculator.keeper.ControllerKeeper;
 import com.mikhadyuk.scholarshipcalculator.model.Student;
+import com.mikhadyuk.scholarshipcalculator.model.User;
+import com.mikhadyuk.scholarshipcalculator.model.enums.Role;
 import com.mikhadyuk.scholarshipcalculator.service.ScholarshipService;
 import com.mikhadyuk.scholarshipcalculator.service.StudentService;
+import com.mikhadyuk.scholarshipcalculator.service.UserService;
 import com.mikhadyuk.scholarshipcalculator.util.PaneUtil;
 import com.mikhadyuk.scholarshipcalculator.util.SingletonUtil;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +27,7 @@ import java.util.Optional;
 public class StudentListController {
     private StudentService studentService;
     private ScholarshipService scholarshipService;
+    private UserService userService;
 
     ObservableList<String> filterItems = FXCollections.observableArrayList();
 
@@ -32,6 +37,13 @@ public class StudentListController {
     private ComboBox filterBox;
     @FXML
     private TextField filterField;
+
+    @FXML
+    private JFXButton addButton;
+    @FXML
+    private JFXButton updateButton;
+    @FXML
+    private JFXButton deleteButton;
 
     @FXML
     private TableView tableView;
@@ -54,6 +66,7 @@ public class StudentListController {
 
         studentService = SingletonUtil.getInstance(StudentService.class);
         scholarshipService = SingletonUtil.getInstance(ScholarshipService.class);
+        userService = SingletonUtil.getInstance(UserService.class);
         studentObservableList.addAll(studentService.getAllStudents());
 
         setUpNameColumn();
@@ -65,6 +78,21 @@ public class StudentListController {
 
         initFilterBox();
         filter();
+
+        User user = userService.loadCurrentUser();
+        if (user != null && user.getRole() == Role.ROLE_ACCOUNTANT) {
+            blockLogicForAccountant();
+        }
+    }
+
+    private void blockLogicForAccountant() {
+        hideButton(addButton);
+        hideButton(updateButton);
+        hideButton(deleteButton);
+    }
+
+    private void hideButton(Button button) {
+        button.setVisible(false);
     }
 
     private void setUpNameColumn() {

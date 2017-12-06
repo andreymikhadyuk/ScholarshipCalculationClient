@@ -35,7 +35,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#add" prefWidth="90.0" ripplerFill="#3d9113" style="-fx-background-color: #AED581;" text="Добавить" textAlignment="CENTER">
+                  <JFXButton fx:id="addButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#add" prefWidth="90.0" ripplerFill="#3d9113" style="-fx-background-color: #AED581;" text="Добавить" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -43,7 +43,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#update" prefWidth="80.0" style="-fx-background-color: #00B0FF;" text="Изменить">
+                  <JFXButton fx:id="updateButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#update" prefWidth="80.0" style="-fx-background-color: #00B0FF;" text="Изменить">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -51,7 +51,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#delete" prefWidth="80.0" ripplerFill="#ae0c0c" style="-fx-background-color: #F44336;" text="Удалить">
+                  <JFXButton fx:id="deleteButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#delete" prefWidth="80.0" ripplerFill="#ae0c0c" style="-fx-background-color: #F44336;" text="Удалить">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
